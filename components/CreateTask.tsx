@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "./ui/textarea"
 
 export default function CreateTask() {
     async function create(formData: FormData) {
@@ -53,13 +54,7 @@ export default function CreateTask() {
                             <div className="flex items-center">
                                 <Label htmlFor="description">Description</Label>
                             </div>
-                            <Input
-                                id="description"
-                                name="description"
-                                type="text"
-                                placeholder="Task description"
-                                required
-                            />
+                            <Textarea id="description" name="description" placeholder="Task description" required />
                         </div>
                         <Select name="priority">
                             <SelectTrigger className="w-full max-w-48">
