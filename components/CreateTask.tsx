@@ -19,18 +19,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "./ui/textarea"
+import { createNewTask } from "@/app/new/task-action"
 
 export default function CreateTask() {
-    async function create(formData: FormData) {
-        "use server"
-        const name = formData.get("name")
-        const description = formData.get("description")
-        const priority = formData.get("priority")
-
-        console.log({ name, description, priority })
-    }
     return (
-        <form className="w-full max-w-sm" action={create}>
+        <form className="w-full max-w-sm" action={createNewTask}>
             <Card>
                 <CardHeader>
                     <CardTitle>Create Task</CardTitle>
