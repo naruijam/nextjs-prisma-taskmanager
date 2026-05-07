@@ -7,10 +7,25 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function CreateTask() {
+    async function create(formData: FormData) {
+        const name = formData.get("name")
+        const description = formData.get("description")
+
+        console.log(name, description)
+    }
     return (
         <form className="w-full max-w-sm">
             <Card>
@@ -37,6 +52,20 @@ export default function CreateTask() {
                             </div>
                             <Input id="description" type="text" placeholder="Task description" required />
                         </div>
+                        <Select>
+                            <SelectTrigger className="w-full max-w-48">
+                                <SelectValue placeholder="Select a priority" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Priority</SelectLabel>
+                                    <SelectItem value="low">Low</SelectItem>
+                                    <SelectItem value="medium">Medium</SelectItem>
+                                    <SelectItem value="high">High</SelectItem>
+                                    <SelectItem value="urgent">Urgent</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
