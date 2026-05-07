@@ -21,13 +21,15 @@ import { Label } from "@/components/ui/label"
 
 export default function CreateTask() {
     async function create(formData: FormData) {
+        "use server"
         const name = formData.get("name")
         const description = formData.get("description")
+        const priority = formData.get("priority")
 
-        console.log(name, description)
+        console.log({ name, description, priority })
     }
     return (
-        <form className="w-full max-w-sm">
+        <form className="w-full max-w-sm" action={create}>
             <Card>
                 <CardHeader>
                     <CardTitle>Create Task</CardTitle>
@@ -41,6 +43,7 @@ export default function CreateTask() {
                             <Label htmlFor="name">Name</Label>
                             <Input
                                 id="name"
+                                name="name"
                                 type="text"
                                 placeholder="Task name"
                                 required
@@ -50,9 +53,15 @@ export default function CreateTask() {
                             <div className="flex items-center">
                                 <Label htmlFor="description">Description</Label>
                             </div>
-                            <Input id="description" type="text" placeholder="Task description" required />
+                            <Input
+                                id="description"
+                                name="description"
+                                type="text"
+                                placeholder="Task description"
+                                required
+                            />
                         </div>
-                        <Select>
+                        <Select name="priority">
                             <SelectTrigger className="w-full max-w-48">
                                 <SelectValue placeholder="Select a priority" />
                             </SelectTrigger>
