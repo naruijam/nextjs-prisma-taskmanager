@@ -19,11 +19,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "./ui/textarea"
-import { createNewTask } from "@/app/new/task-action"
+import { createNewTask, updateTask } from "@/app/new/task-action"
+import { Task } from "@/generated/prisma/client"
 
-export default function CreateTask() {
+export default function CreateTask({ task }: { task: Task }) {
+    const functionAction = task?.id ? updateTask : createNewTask
     return (
-        <form className="w-full max-w-sm" action={createNewTask}>
+        <form className="w-full max-w-sm" action={functionAction}>
+            <Input type="hidden" name="id" value={task?.id} />
             <Card>
                 <CardHeader>
                     <CardTitle>Create Task</CardTitle>
@@ -40,16 +43,16 @@ export default function CreateTask() {
                                 name="name"
                                 type="text"
                                 placeholder="Task name"
-                                required
+                                defaultValue={task?.name}
                             />
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
                                 <Label htmlFor="description">Description</Label>
                             </div>
-                            <Textarea id="description" name="description" placeholder="Task description" required />
+                            <Textarea id="description" name="description" placeholder="Task description" defaultValue={task?.description || ""} />
                         </div>
-                        <Select name="priority">
+                        <Select name="priority" defaultValue={task?.priority}>
                             <SelectTrigger className="w-full max-w-48">
                                 <SelectValue placeholder="Select a priority" />
                             </SelectTrigger>

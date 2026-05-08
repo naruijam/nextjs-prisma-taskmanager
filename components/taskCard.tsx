@@ -10,6 +10,7 @@ import { Button } from "./ui/button"
 import { Badge } from "./ui/badge"
 import clsx from "clsx"
 import TaskButtonDelete from "./TaskButtonDelete"
+import Link from "next/link"
 
 export default function TaskCard({ task }: { task: Task }) {
     return (
@@ -31,10 +32,16 @@ export default function TaskCard({ task }: { task: Task }) {
                 <p>{task.description}</p>
                 <span className="text-slate-600">{task.createdAt.toLocaleDateString()}</span>
             </CardContent>
-            <CardFooter>
-                <Button variant="secondary">
+            <CardFooter className="gap-2">
+                {/*<Button variant="outline">
                     Edit
-                </Button>
+                </Button>*/}
+                <Link href={`/task/${task.id}/edit`}>
+                    <Button variant="outline">
+                        Edit
+                    </Button>
+                </Link>
+
                 <TaskButtonDelete taskId={task.id} />
             </CardFooter>
         </Card>
